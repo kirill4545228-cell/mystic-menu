@@ -4,27 +4,21 @@ name: Build Mystic Menu
 push:
 workflow_dispatch:
 
-permissions:
-contents: read
-
 jobs:
 build:
 runs-on: ubuntu-latest
 steps:
-- name: Checkout repository
-uses: actions/checkout@v4
+- uses: actions/checkout@v4
 
-  - name: Set up Java 17
-    uses: actions/setup-java@v4
+  - uses: actions/setup-java@v4
     with:
       distribution: temurin
       java-version: '17'
 
-  - name: Build with Gradle
-    run: chmod +x gradlew && ./gradlew build
+  - name: Build mod
+    run: ./gradlew build
 
-  - name: Upload JAR
-    uses: actions/upload-artifact@v4
+  - uses: actions/upload-artifact@v4
     with:
       name: Mystic-Menu
       path: build/libs/*.jar
