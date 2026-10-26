@@ -1,28 +1,28 @@
 name: Build Mystic Menu
 
 'on':
-push:
-workflow_dispatch:
+  push:
+  workflow_dispatch:
 
 jobs:
-build:
-runs-on: ubuntu-latest
-steps:
-- name: Checkout repository
-uses: actions/checkout@v4
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-  - name: Set up Java 17
-    uses: actions/setup-java@v4
-    with:
-      distribution: temurin
-      java-version: '17'
+      - name: Set up Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
 
-  - name: Build mod
-    run: chmod +x gradlew && ./gradlew build
+      - name: Build mod
+        run: chmod +x gradlew && ./gradlew build
 
-  - name: Upload JAR
-    uses: actions/upload-artifact@v4
-    with:
-      name: Mystic-Menu
-      path: build/libs/*.jar
-      if-no-files-found: error
+      - name: Upload JAR
+        uses: actions/upload-artifact@v4
+        with:
+          name: Mystic-Menu
+          path: build/libs/*.jar
+          if-no-files-found: error
