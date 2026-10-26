@@ -1,7 +1,7 @@
 {
 "schemaVersion": 1,
 "id": "mysticmenu",
-"version": "${version}",
+"version": "${1.0.0}",
 "name": "Mystic Menu",
 "description": "Beautiful purple control menu for Minecraft.",
 "authors": [
