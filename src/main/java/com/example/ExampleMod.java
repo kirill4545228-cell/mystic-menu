@@ -25,6 +25,6 @@ public class ExampleMod implements ModInitializer {
 	}
 
 	public static Identifier id(String path) {
-		return Identifier.fromNamespaceAndPath(MOD_ID, path);
+    return new Identifier(MOD_ID, path);
 	}
 }
