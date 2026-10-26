@@ -2,6 +2,7 @@ package com.example;
 
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 
@@ -9,6 +10,37 @@ public class MysticMenuScreen extends Screen {
 
     public MysticMenuScreen() {
         super(Text.literal("Mystic Menu"));
+    }
+
+    @Override
+    protected void init() {
+        int centerX = this.width / 2;
+        int centerY = this.height / 2;
+
+        this.addDrawableChild(
+                ButtonWidget.builder(
+                        Text.literal("Modules"),
+                        button -> {
+                            // Здесь добавим экран модулей
+                        }
+                ).dimensions(centerX - 75, centerY - 40, 150, 25).build()
+        );
+
+        this.addDrawableChild(
+                ButtonWidget.builder(
+                        Text.literal("Settings"),
+                        button -> {
+                            // Здесь добавим настройки
+                        }
+                ).dimensions(centerX - 75, centerY - 5, 150, 25).build()
+        );
+
+        this.addDrawableChild(
+                ButtonWidget.builder(
+                        Text.literal("Close"),
+                        button -> this.close()
+                ).dimensions(centerX - 75, centerY + 30, 150, 25).build()
+        );
     }
 
     @Override
@@ -23,7 +55,6 @@ public class MysticMenuScreen extends Screen {
         int centerX = this.width / 2;
         int centerY = this.height / 2;
 
-        // Фон панели
         context.fill(
                 centerX - 110,
                 centerY - 100,
@@ -32,44 +63,22 @@ public class MysticMenuScreen extends Screen {
                 0xE0101020
         );
 
-        // Заголовок
         context.drawCenteredTextWithShadow(
                 this.textRenderer,
                 Text.literal("MYSTIC MENU")
                         .formatted(Formatting.LIGHT_PURPLE, Formatting.BOLD),
                 centerX,
-                centerY - 80,
-                0xFFFFFF
+                centerY - 75,
+                0xFFFFFFFF
         );
-
-        // Кнопки
-        drawButton(context, centerX, centerY - 35, "Modules");
-        drawButton(context, centerX, centerY, "Settings");
-        drawButton(context, centerX, centerY + 35, "Close");
 
         super.render(context, mouseX, mouseY, delta);
     }
 
-    private void drawButton(
-            DrawContext context,
-            int centerX,
-            int y,
-            String text
-    ) {
-        context.fill(
-                centerX - 75,
-                y,
-                centerX + 75,
-                y + 25,
-                0xFF35234D
-        );
-
-        context.drawCenteredTextWithShadow(
-                this.textRenderer,
-                Text.literal(text),
-                centerX,
-                y + 8,
-                0xFFFFFFFF
-        );
+    @Override
+    public void close() {
+        if (this.client != null) {
+            this.client.setScreen(null);
+        }
     }
 }
